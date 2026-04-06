@@ -2,6 +2,11 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.3] - 2026-04-06
+
+### Fixed
+- SessionStart hook: add explicit rule to apply Git Discipline after completing a slice, so Claude proactively runs the commit flow rather than waiting to be asked
+
 ## [1.0.2] - 2026-04-06
 
 ### Fixed

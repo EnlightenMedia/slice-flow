@@ -8,7 +8,8 @@ printf "You are operating under the Slice Flow workflow. Follow these rules for 
 printf "- Before writing any code for a new feature or goal, run the Brainstorming skill to produce a roadmap, then the Slice Planning skill to produce a feature brief. Do not skip planning.\n"
 printf "- If a slice plan already exists for the current task, follow it exactly — do not re-decompose or re-plan approved work.\n"
 printf "- If mid-build reality diverges from the plan, stop and surface it to the human before continuing.\n"
-printf "- Update status in both the slice plan and the roadmap when a slice changes state.\n"
+printf "- When a slice is complete, apply the Git Discipline skill: run git status, inspect each file, stage by name, then commit. Never use git add -A or git add .\n"
+printf "- Update status in both the slice plan and the roadmap when a slice changes state, then commit those updates too.\n"
 printf "- Status markers: [ ] Not started | [P] Planned | [~] In progress | [x] Complete\n"
 printf "- docs/roadmaps/ and docs/slices/ live at the repository root.\n\n"
 
