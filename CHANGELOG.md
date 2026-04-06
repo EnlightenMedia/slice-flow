@@ -2,6 +2,11 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.2] - 2026-04-06
+
+### Fixed
+- SessionStart hook: always inject workflow rules so Claude enforces planning before coding, even on new projects with no docs yet
+
 ## [1.0.1] - 2026-04-06
 
 ### Fixed
