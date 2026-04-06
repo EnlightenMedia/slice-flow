@@ -152,3 +152,7 @@ Do not silently swap in an alternative — the user drives technical decisions.
   Express tutorial.
 - When recommending alternatives, limit to 2-3 options with clear tradeoffs.
   Do not present a catalogue.
+- **Training data familiarity is not verification.** If you haven't looked
+  up the API in this session, you haven't verified it. Confidence from
+  training data is the most common reason to skip research — and the most
+  common reason it goes wrong.

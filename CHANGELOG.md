@@ -2,6 +2,12 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.13] - 2026-04-07
+
+### Changed
+- Research skill: add "training data familiarity is not verification" guardrail
+- SessionStart hook: add rule to run research before using any versioned third-party API
+
 ## [1.0.12] - 2026-04-06
 
 ### Changed

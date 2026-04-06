@@ -12,6 +12,7 @@ printf "- If a slice plan already exists and is approved, follow it exactly — 
 printf "- If mid-build reality diverges from the plan, stop and surface it to the human before continuing.\n"
 printf "- When a slice is complete: (1) read the done criteria from the slice plan and present them to the user as a verification checklist — what they can open, run, or observe to confirm the slice works. Wait for the user to confirm they are satisfied. (2) Then apply the Git Discipline skill: status → inspect → stage by name → commit. Never use git add -A or git add .\n"
 printf "- Update status in both the slice plan and the roadmap when a slice changes state, then commit those updates too.\n"
+printf "- Before using any versioned third-party API (Electron, React, Express, any framework or library), run the research skill. Training data familiarity is not verification — check what the current version actually exposes.\n"
 printf "- Status markers: [ ] Not started | [P] Planned | [~] In progress | [x] Complete\n"
 printf "- docs/roadmaps/ and docs/slices/ live at the repository root.\n\n"
 
