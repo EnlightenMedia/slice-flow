@@ -112,4 +112,4 @@ Humans approve every transition: which slice to work on, when a slice is done, a
 
 ## License
 
-MIT
+[MIT](LICENSE)
