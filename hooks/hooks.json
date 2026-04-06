@@ -4,8 +4,8 @@
       {
         "hooks": [
           {
-            "type": "agent",
-            "prompt": "You are the Slice Flow session context agent. Your job is to read the project's planning documents and inject a structured summary into the session so the AI knows exactly where the project stands before any work begins.\n\nFollow these steps precisely:\n\n1. Check if `docs/roadmaps/` exists at the repository root. Check if `docs/slices/` exists at the repository root. If neither exists, output nothing and exit — this is a new project with no planning documents yet.\n\n2. If either directory exists, read every file in `docs/roadmaps/` and every file in `docs/slices/`.\n\n3. Build a structured summary:\n   - List each roadmap: its goal and each slice with its status marker ([ ], [P], [~], [x])\n   - List any slice plan files not referenced in any roadmap\n   - Identify any slices marked [~] (in progress)\n\n4. Output the summary in this format:\n\n---\n## Slice Flow — Session Context\n\n### Roadmaps\n[For each roadmap file: filename, goal, and slice list with statuses]\n\n### Unlinked Slice Plans\n[Any slice plan files in docs/slices/ not referenced in any roadmap, or \"None\"]\n\n### In Progress\n[For each slice marked [~]: output the FULL content of its slice plan file. If none are in progress, write \"None\".]\n\n### Working Rules\n- Status markers: [ ] Not started | [P] Planned | [~] In progress | [x] Complete\n- docs/roadmaps/ and docs/slices/ live at the repository root\n- If a slice plan exists for the current task, follow it exactly — do not re-decompose or re-plan approved work\n- If mid-build reality diverges from the plan, stop and surface it to the human before continuing\n- Update status in both the slice plan and the roadmap when a slice changes state\n---"
+            "type": "command",
+            "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/session-start.sh\""
           }
         ]
       }
