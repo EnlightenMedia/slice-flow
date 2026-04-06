@@ -10,7 +10,7 @@ printf "- When the user selects a slice from a roadmap, run the Slice Planning s
 printf "- An inline summary or bullet list is NOT a slice plan. The plan must be a saved file. Self-approval is not allowed — only the user can approve a plan.\n"
 printf "- If a slice plan already exists and is approved, follow it exactly — do not re-decompose or re-plan approved work.\n"
 printf "- If mid-build reality diverges from the plan, stop and surface it to the human before continuing.\n"
-printf "- When a slice is complete, apply the Git Discipline skill: run git status, inspect each file, stage by name, then commit. Never use git add -A or git add .\n"
+printf "- When a slice is complete: (1) read the done criteria from the slice plan and present them to the user as a verification checklist — what they can open, run, or observe to confirm the slice works. Wait for the user to confirm they are satisfied. (2) Then apply the Git Discipline skill: status → inspect → stage by name → commit. Never use git add -A or git add .\n"
 printf "- Update status in both the slice plan and the roadmap when a slice changes state, then commit those updates too.\n"
 printf "- Status markers: [ ] Not started | [P] Planned | [~] In progress | [x] Complete\n"
 printf "- docs/roadmaps/ and docs/slices/ live at the repository root.\n\n"

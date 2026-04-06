@@ -1,6 +1,6 @@
 {
   "name": "slice-flow",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Enforces iterative, human-gated, slice-based development with AI coding assistants.",
   "author": {
     "url": "https://github.com/EnlightenMedia/slice-flow",

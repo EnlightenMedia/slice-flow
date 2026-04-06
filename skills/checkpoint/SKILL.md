@@ -65,11 +65,14 @@ Do not add extra gates on top of Claude's native behavior within a slice.
 **Step 3 — Pause between slices.**
 
 After completing a slice, stop and report:
-- What was built
-- How to verify it
+- What was built (brief summary)
+- Read the done criteria from the slice plan and present them as a user
+  verification checklist: concrete steps the user can take to confirm the
+  slice works (what to open, what to click, what to observe, what to run)
 
-Then present what the next slice will be and wait for explicit approval
-before starting it. Do NOT silently continue into the next slice.
+Wait for the user to confirm they are satisfied. Then present what the next
+slice will be and wait for explicit approval before starting it.
+Do NOT silently continue into the next slice.
 
 ## Rules
 

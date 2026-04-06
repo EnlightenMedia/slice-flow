@@ -2,6 +2,12 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.12] - 2026-04-06
+
+### Changed
+- SessionStart hook: at slice completion, present done criteria as a user verification checklist before running git-discipline
+- Checkpoint skill Step 3: explicitly read done criteria from slice plan and present as concrete user-verification steps
+
 ## [1.0.11] - 2026-04-06
 
 ### Changed
