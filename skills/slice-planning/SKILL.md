@@ -1,76 +1,110 @@
-# Slice Planning
+---
+name: slice-planning
+description: >-
+  Produces a feature brief with tasks and done criteria for a single slice.
+  TRIGGER when: the user is ready to start working on a specific slice and
+  needs to break it into tasks before implementation begins.
+  DO NOT TRIGGER when: the user is asking a question, wants a recommendation,
+  is still brainstorming, or already has a plan and wants to start building.
+user-invocable: true
+argument-hint: "[slice name or number from roadmap]"
+---
 
-Produces a feature brief for a single approved slice from a roadmap.
+# Slice Planning — Feature Brief for One Slice
 
-## When to trigger
+This skill takes a single slice from an approved roadmap and produces a
+feature brief: what it delivers, what tasks are needed to build it, and
+how to know when it's done. Implementation detail belongs in the build
+phase, not here.
 
-Trigger when the user selects a specific slice from an approved roadmap and wants to plan it before building.
+Do NOT write implementation code during slice planning. Do NOT prescribe
+file structures, class interfaces, code snippets, or startup sequences.
+The only artifact is the feature brief.
 
-Do NOT trigger when:
-- The user is still brainstorming or deciding which slice to work on
-- The user already has an approved slice plan and wants to build — follow the plan, do not re-plan
-- The user is asking questions or running exploratory commands
+## Step 1 — Load Context
 
-## What it produces
+Find and read the relevant roadmap document from `docs/roadmaps/`.
+If no roadmap exists, ask the user to describe the slice they want to plan.
 
-A feature brief saved to `docs/slices/YYYY-MM-DD-slice-N-<slice-name>.md` containing:
-- Slice name and number
-- Objective
-- Key decisions
-- Numbered tasks (what to build, not how)
-- Done criteria (what the user can verify, not internal code details)
-- Status
+Identify the specific slice to plan. If the user didn't specify, ask which
+slice they want to work on next.
 
-## Behaviors
+Check whether any prior slices have been completed that affect this one
+(read prior slice plans and their status if they exist).
 
-1. Load the relevant roadmap. Check the status of prior slices to understand the starting point and any dependencies.
+## Step 2 — Explore the Codebase
 
-2. Explore the codebase to understand what is already built, what conventions the project follows, and what dependencies are installed. Use this to inform tasks — not to prescribe implementation.
+Before planning, understand what already exists:
+- What's already built from prior slices?
+- What conventions does the project follow?
+- What dependencies are already installed?
 
-3. Write tasks that describe what to build, not how. Write done criteria that describe what the user can observe or verify, not what the code looks like internally.
+This informs the tasks — not to prescribe how to build, but to understand
+the starting point.
 
-4. Keep the brief to one screen. If a slice needs more than 3–7 tasks, flag that it should probably be split into two smaller slices.
+## Step 3 — Write the Feature Brief
 
-5. Flag any architecture or library decisions that need research verification before the build begins.
+**Write the draft to file** at `docs/slices/YYYY-MM-DD-slice-N-<slice-name>.md`
+so the user can review it in their editor. The terminal is not a good
+place to read structured plans.
 
-6. Present the brief and iterate until the user approves.
+The brief should contain:
 
-7. Once approved:
-   - Save the feature brief to `docs/slices/YYYY-MM-DD-slice-N-<slice-name>.md`
-   - Update the roadmap to mark the slice as `[P] Planned` with a link to the slice plan file
-   - Suggest a commit
+- **Slice** — name and which roadmap it belongs to
+- **Objective** — what the user can see, run, or demonstrate when this
+  slice is complete (restate from roadmap)
+- **Key decisions** — architectural or library choices that affect this
+  slice or future slices. Only include decisions where there's a genuine
+  alternative worth noting. If a choice needs research into current
+  package versions or APIs, flag it for the research skill.
+- **Tasks** — a numbered list of implementation tasks. Each task should
+  be a logical step toward the objective, not a file-level prescription.
+  Think "what do we need to build" not "what code do we write."
+- **Done criteria** — a checklist of observable, verifiable conditions
+  that must all be true for the slice to be considered complete. These
+  should be testable by the user, not internal implementation checks.
+- **Status** — use standard markers: `[ ]` Not started, `[P]` Planned,
+  `[~]` In progress, `[x]` Complete. Initial status is `[ ] Not started`
 
-8. Plan one slice at a time. Do not plan the next slice until the current one is complete.
+**What NOT to include:**
+- File paths or directory structures — the implementer decides those
+- Class interfaces or function signatures — those emerge during coding
+- Code snippets or pseudocode — that's implementation
+- Startup sequences or data flow diagrams — too prescriptive
 
-## Feature brief format
+After writing the file, tell the user where it is and ask them to review.
 
-```markdown
-# Slice N — <Name>
+**Stop completely.** Do not list implementation steps, do not create a
+task tracker, do not begin any work. Wait for the user to reply.
+Their reply is the gate — nothing else is.
 
-**Objective:** <one sentence>
-**Status:** [P] Planned
-**Roadmap:** [link to roadmap file]
-**Created:** YYYY-MM-DD
+## Step 4 — Refine
 
-## Key Decisions
+The user may:
+- Adjust the task breakdown
+- Add or remove done criteria
+- Challenge a key decision
+- Ask you to research a library or API before committing
+- Flag that a task is too big or too small
 
-- <decision 1>
-- <decision 2>
+Update the file with each revision. Iterate until the user approves.
 
-## Tasks
+## Step 5 — Finalise
 
-1. <what to build>
-2. <what to build>
-...
+Once approved, update the roadmap document to mark this slice as
+`[P] Planned` with a link to the slice plan.
 
-## Done Criteria
+## Guidelines
 
-- <what the user can see or verify>
-- <what the user can see or verify>
-```
-
-## Guardrails
-
-- Do NOT prescribe file structures, class interfaces, code snippets, file paths, or directory layouts — the implementer decides
-- Do NOT include startup sequences or data flow diagrams — these are too prescriptive
-- Do NOT plan the next slice until the current one is complete
+- Keep it brief. A good feature brief fits on one screen.
+- Tasks describe what to build, not how to build it.
+- Done criteria describe what the user can verify, not what the code
+  looks like internally.
+- One slice at a time. Do not plan the next slice until this one is done.
+- If a slice is too large to break into 3-7 tasks, it should probably
+  be split into smaller slices — flag this to the user.
+- **No self-sequencing.** Phrases like "now let me implement", "let's get
+  started", or creating a task/step list before approval are implementation
+  acts. They are forbidden before the user approves the written brief.
+- **No self-approval.** Only the user can approve the brief. Agreement
+  with your own plan is not approval.

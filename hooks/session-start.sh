@@ -5,8 +5,10 @@
 
 printf "## Slice Flow — Working Rules\n\n"
 printf "You are operating under the Slice Flow workflow. Follow these rules for every session:\n\n"
-printf "- Before writing any code for a new feature or goal, run the Brainstorming skill to produce a roadmap, then the Slice Planning skill to produce a feature brief. Do not skip planning.\n"
-printf "- If a slice plan already exists for the current task, follow it exactly — do not re-decompose or re-plan approved work.\n"
+printf "- Before writing any code for a new feature or goal, run the Brainstorming skill to produce a roadmap. Do not skip this.\n"
+printf "- When the user selects a slice from a roadmap, run the Slice Planning skill to produce a written feature brief saved to docs/slices/. Present it and STOP. Wait for the user to explicitly say they approve before writing any code.\n"
+printf "- An inline summary or bullet list is NOT a slice plan. The plan must be a saved file. Self-approval is not allowed — only the user can approve a plan.\n"
+printf "- If a slice plan already exists and is approved, follow it exactly — do not re-decompose or re-plan approved work.\n"
 printf "- If mid-build reality diverges from the plan, stop and surface it to the human before continuing.\n"
 printf "- When a slice is complete, apply the Git Discipline skill: run git status, inspect each file, stage by name, then commit. Never use git add -A or git add .\n"
 printf "- Update status in both the slice plan and the roadmap when a slice changes state, then commit those updates too.\n"

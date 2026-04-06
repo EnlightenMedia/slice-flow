@@ -1,73 +1,170 @@
-# Brainstorming
+---
+name: brainstorming
+description: >-
+  Collaborative design that produces a sliced roadmap for iterative delivery.
+  TRIGGER when: the user wants to plan a new feature, project, or significant
+  piece of work before implementation begins.
+  DO NOT TRIGGER when: the user is asking a question, wants a recommendation,
+  is exploring ideas, or already has a clear single task and wants to start building.
+  Not every conversation needs a roadmap - just answer questions directly.
+user-invocable: true
+argument-hint: "[what you want to build]"
+---
 
-Converts a high-level idea into a prioritized roadmap of vertical slices.
+# Brainstorming — From Idea to Sliced Roadmap
 
-## When to trigger
+This skill turns an idea into a prioritised list of vertical slices ready for
+iterative delivery. The output is a roadmap, not a spec — each slice is
+something you can build, run, and demonstrate.
 
-Trigger when the user presents a high-level idea, feature request, or goal that needs to be broken down into a plan before any code is written.
+Do NOT write any code or create any implementation files during brainstorming.
+The only artifact is the roadmap document.
 
-Do NOT trigger when:
-- The user is asking a simple question or having an exploratory conversation
-- The user already has a clear single task and wants to build it
-- A slice plan already exists for the current work — follow it, do not re-plan
+## Step 0 — Check for an Existing Roadmap
 
-## What it produces
+Before starting from scratch, check `docs/roadmaps/` for an existing roadmap
+that covers this project or feature area.
 
-A roadmap document saved to `docs/roadmaps/YYYY-MM-DD-<topic>.md` containing:
-- The goal
-- The chosen approach
-- An ordered list of vertical slices with observable results, dependencies, and status markers
+**If a roadmap exists**, read it and understand:
+- What has already been completed (check slice statuses)
+- What is planned but not yet started
+- What the current approach and tech stack are
 
-## Vertical slice definition
+Also check `docs/slices/` for any slice plans that aren't referenced in
+a roadmap. These are standalone slices that still occupy a slice number.
+New slices must not conflict with existing slice numbers — whether those
+slices are in a roadmap or not.
 
-A vertical slice cuts through all layers of the stack and delivers observable, end-to-end value. A non-technical stakeholder should be able to see or use the result independently.
+Then ask the user: are they extending this roadmap with new features, or
+starting a separate roadmap for something unrelated?
 
-What is NOT a vertical slice:
-- A layer ("build the API", "build the UI") — this is layer-cake decomposition
-- Plumbing ("set up the database", "configure auth middleware") — infrastructure, not value
-- Testing ("write tests") — testing is part of every slice, not a separate one
-- Something only verifiable by a developer ("testable with curl" is not observable value for a web app)
+- **Extending:** Skip Steps 1-2 (the goal and approach are established).
+  Go straight to Step 3 and propose new slices that build on what exists.
+  New slices should continue the numbering from the highest existing slice
+  number (in roadmaps or standalone slice plans) and declare dependencies
+  on existing slices where appropriate.
+- **New roadmap:** Proceed from Step 1 as normal.
 
-## Behaviors
+**If no roadmap exists**, proceed from Step 1.
 
-1. Before starting, check `docs/roadmaps/` and `docs/slices/` for existing documents. If a roadmap already exists, ask whether to extend it or start a new one.
+## Step 1 — Understand the Goal
 
-2. When extending an existing roadmap:
-   - Continue slice numbering from the highest existing number across both `docs/roadmaps/` and `docs/slices/`
-   - Never modify completed (`[x]`) or in-progress (`[~]`) slices
+Ask clarifying questions to understand what the user wants to build and why.
+Before moving to approaches, ensure you have covered the full surface area
+of the problem. Use this checklist mentally — you do not need to ask about
+every item, but you must not leave an entire dimension unexplored:
 
-3. Ask clarifying questions one at a time. Prefer multiple-choice over open-ended. Stop asking once there is enough information to slice meaningfully.
+- **Users** — who uses this and how?
+- **Frontend** — is there a UI? What kind? (web, mobile, CLI, none)
+- **Backend** — APIs, services, data storage?
+- **Tech stack** — languages, frameworks, platforms for each layer
+- **Integrations** — third-party services, APIs, auth providers?
+- **Deployment** — where does this run? Local, cloud, CI/CD?
+- **Constraints** — budget, timeline, existing codebase, team size?
 
-4. If the chosen approach depends on an external package or library, invoke the Research skill to verify it exists and is actively maintained before finalising the roadmap.
+Rules:
+- One question at a time. Do not dump a list of five questions.
+- Prefer multiple-choice where possible — it's faster for the user to pick
+  than to write from scratch.
+- If the user's answer to one question reveals a dimension you haven't
+  covered, ask about it before moving on.
+- Stop asking when you have enough to propose approaches. You do not need
+  a complete specification — just enough to slice meaningfully.
+- If the user has already explained the goal clearly, skip to Step 2.
 
-5. Enforce vertical slice decomposition. Reject layer-cake breakdowns — do not accept them as slices, explain why, and re-ask.
+## Step 2 — Present Approaches
 
-6. Bias toward fewer, larger slices. 3–7 slices is typical. More than 10 suggests over-slicing or a scope that is too large.
+If there is a meaningful architectural or strategic choice, present 2-3
+approaches. For each, state:
+- The core idea in one sentence
+- Key tradeoff (what you gain, what you give up)
 
-7. Before presenting slices, run a self-check: could a non-technical stakeholder see or use the result of each slice independently? If not, merge slices until the answer is yes.
+If there is no meaningful choice (the path is obvious), say so and skip to
+Step 3. Do not invent artificial alternatives.
 
-8. Present the proposed slices and expect the user to reorder, split, merge, remove, or add. Iterate until the user explicitly approves.
+**Verify key dependencies before committing.** If the chosen approach depends
+on a specific external package, library, or service existing (e.g. "use a
+ConPTY wrapper for C#", "use a React PDF renderer"), research it now using
+the research skill. Confirm that:
+- A viable package exists for the target language/platform
+- It is actively maintained (not archived or abandoned)
+- It does what the approach assumes it does
 
-9. Once approved, save the roadmap to `docs/roadmaps/YYYY-MM-DD-<topic>.md` and suggest a commit.
+If research reveals that a key dependency doesn't exist or isn't viable,
+surface this to the user before proceeding — the approach itself may need
+to change. Do not commit to an approach that depends on a package you
+haven't verified.
 
-## Roadmap document format
+Wait for the user to choose or direct before continuing.
 
-```markdown
-# <Topic> Roadmap
+## Step 3 — Decompose into Vertical Slices
 
-**Goal:** <one sentence>
-**Approach:** <chosen approach and rationale>
-**Created:** YYYY-MM-DD
+Break the chosen approach into vertical slices. A vertical slice is:
+- A unit of work that delivers observable, runnable value on its own
+- Spans all layers needed to deliver that value (UI + API + storage)
+- Small enough to build and review in one session
 
-## Slices
+**The "layer cake" anti-pattern:** Never split "build the API" and "build
+the UI" into separate slices. The first slice of any web app must span all
+layers — UI, API, and storage — delivering the core happy path end-to-end.
+"Testable with curl" is not observable value for a web app. Similarly,
+"set up the database" is not a slice — it's plumbing that belongs inside
+the first slice that uses it.
 
-- [ ] Slice 1 — <name>: <observable result>
-- [ ] Slice 2 — <name>: <observable result>
-...
-```
+**Self-check before presenting:** For each slice, ask: could a non-technical
+stakeholder see or use this independently? If not, merge it with the next
+slice until the answer is yes.
 
-## Guardrails
+For each slice, provide:
+- **Name** — short label
+- **Observable result** — what the user can see, run, or verify when it's done
+- **Depends on** — which prior slices must be complete first (if any)
 
-- Do NOT write any code or create implementation files
-- Do NOT plan "future enhancements" or "nice to haves" beyond what was asked
-- Do NOT number new slices in a way that conflicts with existing slice numbers in either `docs/roadmaps/` or `docs/slices/`
+Present the slices in recommended build order.
+
+**Write the roadmap to file:**
+- **New roadmap:** Write to `docs/roadmaps/YYYY-MM-DD-<topic>.md`
+- **Extending:** Update the existing roadmap file — append new slices,
+  do not modify completed or in-progress slices.
+
+The roadmap should contain:
+- **Goal** — one paragraph on what we're building and why
+- **Approach** — the chosen approach (one paragraph)
+- **Slices** — the full slice list with Name, Observable result, and
+  Depends on for each
+- **Status** — each slice marked with a standard status marker:
+  `[ ]` Not started, `[P]` Planned, `[~]` In progress, `[x]` Complete
+
+After writing the file, tell the user where it is and ask them to review.
+
+**Stop completely.** Do not list implementation steps, do not begin slice
+planning, do not start any work. Wait for the user to reply.
+Their reply is the gate — nothing else is.
+
+## Step 4 — Refine
+
+The user may:
+- Reorder slices
+- Split a slice that's too big
+- Merge slices that are too small
+- Remove slices they don't want yet
+- Add slices you missed
+
+Update the file with each revision. Iterate until the user approves
+the slice list. Do not rush this step — getting the slices right is
+more valuable than starting fast.
+
+## Guidelines
+
+- Stay conversational. This is a dialogue, not a presentation.
+- Bias toward fewer, larger slices rather than a long list of tiny ones.
+  3-7 slices is typical. If you have more than 10, you're probably slicing
+  too thin or the scope is too large for one roadmap.
+- Do not include testing as a separate slice. Testing is part of every slice.
+- Do not plan beyond what the user has asked for. No "future enhancements"
+  or "nice to have" sections.
+- **No self-sequencing.** Phrases like "now let me plan the first slice",
+  "let's get started on slice 1", or moving directly into slice planning
+  are forbidden before the user explicitly approves the roadmap.
+- **No self-approval.** Only the user can approve the roadmap. Agreement
+  with your own proposal is not approval.

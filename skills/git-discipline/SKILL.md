@@ -1,45 +1,41 @@
-# Git Discipline
+---
+name: git-discipline
+description: >-
+  Git safety checks before committing. TRIGGER when: about to run git add,
+  git commit, or any git staging operation. Also trigger when starting work
+  in a project for the first time to check for .gitignore. Make sure to use
+  this skill whenever staging files, committing changes, or initialising a
+  git repository, even if it seems routine.
+user-invocable: false
+---
 
-Ensures safe commit hygiene by validating what is being committed before it is committed.
+# Git Discipline — Commit Safe
 
-## When to trigger
+The commit flow is always: **status → inspect → stage by name → commit.**
+Never skip or reorder these steps.
 
-Trigger on every commit attempt — non-negotiable.
+## Before the First Commit in a Project
 
-## What it produces
+Before making any commit in a project, check:
 
-Validation and verification only — no new files created.
+1. **Does a `.gitignore` file exist?** If not, create one appropriate for
+   the project's tech stack before committing anything.
+2. **Review what's being staged.** Look for files that should not be
+   committed:
+   - `.env` files, credentials, API keys, secrets
+   - Build output, `node_modules/`, `bin/`, `obj/`
+   - IDE-specific files (`.vs/`, `.idea/`) unless the project already
+     tracks them
+   - Large binary files, database files
+   - OS files (`.DS_Store`, `Thumbs.db`)
+3. **If there is any doubt about whether a file contains sensitive data,
+   ask the user before staging it.** Do not guess. The cost of asking is
+   low; the cost of committing a secret is high.
 
-## Commit flow
+## Sensitive File Patterns — Always Require Explicit Human Confirmation
 
-The flow is always: **status → inspect → stage by name → commit**
-
-1. **Status** — run `git status` to produce an explicit manifest of all changed and untracked files
-2. **Inspect** — review each file on the manifest individually before staging
-3. **Stage by name** — stage specific files by name from the verified manifest
-4. **Commit** — create the commit with a descriptive message
-
-Never use `git add -A` or `git add .` — always stage by explicit filename.
-
-## Before the first commit in a project
-
-Check for a `.gitignore` file. If one does not exist, create one appropriate for the tech stack before anything is committed.
-
-## Per-file checks
-
-For each file on the manifest, check for:
-- `.env` files, credentials, API keys, secrets
-- Build output (`node_modules/`, `bin/`, `obj/`, `dist/`, `.next/`, `__pycache__/`)
-- IDE-specific files (`.vs/`, `.idea/`, `.vscode/` unless already tracked)
-- Large binary files
-- Database files
-- OS files (`.DS_Store`, `Thumbs.db`)
-
-If the project's `.gitignore` is missing entries for detected tech stack artifacts, update it before staging.
-
-## Sensitive file patterns — always require explicit human confirmation
-
-The following patterns bypass all judgment and always require the user to explicitly confirm before staging, without exception:
+The following patterns bypass all judgment. Always ask the user to explicitly
+confirm before staging, without exception:
 
 - `.env*`
 - `*.pem`
@@ -49,10 +45,16 @@ The following patterns bypass all judgment and always require the user to explic
 - `*.p12`
 - `*.pfx`
 
-If sensitive-looking files are present in the working tree (even if gitignored), mention them to the user as a heads-up.
+If any of these are present in the working tree (even if gitignored), mention
+them to the user as a heads-up.
 
-## Guardrails
+## During Ongoing Work
 
-- If there is any doubt about whether a file contains sensitive data, ask the user before staging — the cost of asking is low; the cost of committing a secret is high
-- The sensitive file patterns listed above bypass doubt entirely — they always require explicit human confirmation regardless of context
-- Never skip this flow, never batch it, never abbreviate it
+- Run `git status` first to produce a manifest of all changed and untracked files.
+- Inspect each file on the manifest individually before staging.
+- Stage specific files by name. Never use `git add -A` or `git add .` — these
+  can sweep in unintended files.
+- If the project's `.gitignore` is missing entries for the current tech
+  stack, update it before staging.
+- If you notice sensitive-looking files in the working tree (even if
+  they're gitignored), mention them to the user as a heads-up.
