@@ -3,9 +3,9 @@
   "version": "1.0.14",
   "description": "Enforces iterative, human-gated, slice-based development with AI coding assistants.",
   "author": {
-    "url": "https://github.com/EnlightenMedia/slice-flow",
     "name": "EnlightenMedia",
-    "email": "contact@enlighten-media.net"
+    "email": "contact@enlighten-media.net",
+    "url": "https://github.com/EnlightenMedia/slice-flow"
   },
   "homepage": "https://github.com/EnlightenMedia/slice-flow",
   "repository": "https://github.com/EnlightenMedia/slice-flow",
@@ -16,5 +16,7 @@
     "vertical-slices",
     "development-process",
     "human-in-the-loop"
-  ]
+  ],
+  "skills": "skills/",
+  "hooks": "hooks/copilot-hooks.json"
 }

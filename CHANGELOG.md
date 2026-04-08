@@ -2,6 +2,13 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.14] - 2026-04-08
+
+### Added
+- GitHub Copilot CLI plugin support: `.github/plugin.json` manifest
+- `hooks/copilot-hooks.json` — Copilot-format hook config (`version: 1`, camelCase event names, bash-only)
+- `hooks/post-tool-use.sh` — PostToolUse commit nudge for Copilot (bash equivalent of the Claude Code agent hook)
+
 ## [1.0.13] - 2026-04-07
 
 ### Changed

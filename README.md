@@ -1,6 +1,6 @@
 # Slice Flow
 
-**A Claude Code plugin that enforces iterative, human-gated, slice-based development.**
+**A plugin for Claude Code and GitHub Copilot CLI that enforces iterative, human-gated, slice-based development.**
 
 Slice Flow prevents the common failure mode of AI-assisted development: rushing into code without a plan, building too much at once, and losing human oversight. It introduces vertical slices as the unit of work, requires planning before implementation, and gates transitions between work units with human approval.
 
@@ -8,6 +8,7 @@ Slice Flow prevents the common failure mode of AI-assisted development: rushing 
 
 ## Installation
 
+**Claude Code:**
 ```bash
 claude plugin install slice-flow
 ```
@@ -20,6 +21,11 @@ claude plugin install slice-flow --scope project
 
 # Personal use only, gitignored
 claude plugin install slice-flow --scope local
+```
+
+**GitHub Copilot CLI:**
+```bash
+gh copilot plugin install slice-flow
 ```
 
 ---
