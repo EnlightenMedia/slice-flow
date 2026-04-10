@@ -2,6 +2,11 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.15] - 2026-04-10
+
+### Fixed
+- PostToolUse agent hook: replaced `"prompt"` field with `"messages"` array (`[{"role": "user", "content": "..."}]`) to match the Claude Code agent hook runner's required schema
+
 ## [1.0.14] - 2026-04-08
 
 ### Added
