@@ -2,6 +2,11 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.17] - 2026-04-13
+
+### Fixed
+- PostToolUse agent hook: include both `"prompt"` (string) and `"messages"` (array) fields with identical content — validator expects `prompt`, runtime expects `messages`; having both should satisfy both sides
+
 ## [1.0.16] - 2026-04-13
 
 ### Fixed
