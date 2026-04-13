@@ -2,6 +2,11 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.22] - 2026-04-13
+
+### Changed
+- Remove postToolUse hook from copilot-hooks.json — commit nudge now handled by skills
+
 ## [1.0.21] - 2026-04-13
 
 ### Changed

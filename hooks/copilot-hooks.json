@@ -7,13 +7,6 @@
         "bash": "hooks/session-start.sh",
         "timeoutSec": 30
       }
-    ],
-    "postToolUse": [
-      {
-        "type": "command",
-        "bash": "hooks/post-tool-use.sh",
-        "timeoutSec": 10
-      }
     ]
   }
 }
