@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "hooks": {
-    "sessionStart": [
+    "SessionStart": [
       {
         "type": "command",
-        "bash": "hooks/session-start.sh",
-        "timeoutSec": 30
+        "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/session-start.sh\"",
+        "windows": "powershell -ExecutionPolicy Bypass -File \"${CLAUDE_PLUGIN_ROOT}\\hooks\\session-start.ps1\"",
+        "timeout": 30
       }
     ]
   }
