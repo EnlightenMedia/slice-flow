@@ -2,6 +2,11 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.19] - 2026-04-13
+
+### Fixed
+- Restore PostToolUse hook (prompt-only) — reverted accidental removal
+
 ## [1.0.18] - 2026-04-13
 
 ### Fixed
