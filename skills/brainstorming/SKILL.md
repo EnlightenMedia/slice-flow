@@ -154,6 +154,12 @@ Update the file with each revision. Iterate until the user approves
 the slice list. Do not rush this step — getting the slices right is
 more valuable than starting fast.
 
+## Step 5 — Commit
+
+Once the user approves the roadmap, commit it using git-discipline:
+run `git status`, stage the roadmap file by name, and commit with a
+message describing what was planned.
+
 ## Guidelines
 
 - Stay conversational. This is a dialogue, not a presentation.

@@ -2,6 +2,13 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.20] - 2026-04-13
+
+### Changed
+- slice-planning: always include a commit task and done criterion in every slice brief; Step 5 now commits the slice plan and roadmap update
+- brainstorming: add Step 5 to commit the roadmap after user approval
+- Replaces the broken PostToolUse agent hook with explicit commit steps baked into the skills themselves
+
 ## [1.0.19] - 2026-04-13
 
 ### Fixed

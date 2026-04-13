@@ -60,9 +60,13 @@ The brief should contain:
 - **Tasks** — a numbered list of implementation tasks. Each task should
   be a logical step toward the objective, not a file-level prescription.
   Think "what do we need to build" not "what code do we write."
+  Always include as the final task: "Commit — run git-discipline and
+  commit all slice changes with a descriptive message."
 - **Done criteria** — a checklist of observable, verifiable conditions
   that must all be true for the slice to be considered complete. These
   should be testable by the user, not internal implementation checks.
+  Always include as the final criterion: "[ ] All slice changes committed
+  to git with a descriptive message."
 - **Status** — use standard markers: `[ ]` Not started, `[P]` Planned,
   `[~]` In progress, `[x]` Complete. Initial status is `[ ] Not started`
 
@@ -93,6 +97,10 @@ Update the file with each revision. Iterate until the user approves.
 
 Once approved, update the roadmap document to mark this slice as
 `[P] Planned` with a link to the slice plan.
+
+Then commit the slice plan and roadmap update using git-discipline:
+run `git status`, stage the slice plan file and the roadmap file by
+name, and commit with a message describing the slice that was planned.
 
 ## Guidelines
 
