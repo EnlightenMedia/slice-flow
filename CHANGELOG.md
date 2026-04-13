@@ -2,6 +2,11 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.16] - 2026-04-13
+
+### Fixed
+- PostToolUse agent hook: reverted `"messages"` array back to `"prompt"` string — Claude Code validator expects `prompt` (string), not `messages` (array)
+
 ## [1.0.15] - 2026-04-10
 
 ### Fixed
