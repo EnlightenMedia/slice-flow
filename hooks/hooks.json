@@ -9,17 +9,6 @@
           }
         ]
       }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "agent",
-            "prompt": "You are the Slice Flow commit nudge agent. Your job is to decide whether to suggest a git commit after a file was just written or edited.\n\nThe file path that was just written or edited is available in the tool result context.\n\nFollow this logic:\n\n1. If the file path starts with `docs/roadmaps/` or `docs/slices/`: output exactly one line suggesting a commit, e.g. \"Roadmap updated — consider committing now with a short descriptive message.\" Then exit.\n\n2. If the file path is a code file: review the surrounding conversation context. If there is a clear signal that a task or meaningful unit of work just completed (e.g. a test just passed, the assistant said it finished a task, a component is now working): output exactly one line suggesting a commit. If the context is ambiguous or shows work is still in progress: output nothing and exit silently.\n\n3. Never output more than one line. Never block or gate — this is a nudge only. Never suggest a commit for partial or in-progress work."
-          }
-        ]
-      }
     ]
   }
 }

@@ -2,6 +2,11 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.21] - 2026-04-13
+
+### Changed
+- Remove PostToolUse hook — replaced by explicit commit steps in brainstorming and slice-planning skills
+
 ## [1.0.20] - 2026-04-13
 
 ### Changed
