@@ -1,0 +1,27 @@
+{
+  "name": "slice-flow-marketplace",
+  "metadata": {
+    "description": "Slice Flow plugin marketplace",
+    "version": "1.0.0"
+  },
+  "owner": {
+    "name": "EnlightenMedia",
+    "email": "contact@enlighten-media.net"
+  },
+  "plugins": [
+    {
+      "name": "slice-flow",
+      "source": ".",
+      "description": "Enforces iterative, human-gated, slice-based development with AI coding assistants.",
+      "version": "1.0.22",
+      "skills": [
+        "./skills/brainstorming",
+        "./skills/checkpoint",
+        "./skills/git-discipline",
+        "./skills/research",
+        "./skills/roadmap-consolidation",
+        "./skills/slice-planning"
+      ]
+    }
+  ]
+}
