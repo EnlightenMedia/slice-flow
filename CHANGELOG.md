@@ -2,6 +2,11 @@
 
 All notable changes to Slice Flow will be documented here.
 
+## [1.0.18] - 2026-04-13
+
+### Fixed
+- PostToolUse agent hook: remove `"prompt"` field, keep only `"messages"` array — hypothesis is that Claude Code picks `prompt` when both are present and then fails to convert it to messages internally
+
 ## [1.0.17] - 2026-04-13
 
 ### Fixed
