@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "slice-flow",
-      "source": ".",
+      "source": "./",
       "description": "Enforces iterative, human-gated, slice-based development with AI coding assistants.",
       "version": "1.0.22",
       "skills": [
